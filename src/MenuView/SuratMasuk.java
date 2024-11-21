@@ -56,6 +56,8 @@ public class SuratMasuk extends javax.swing.JFrame {
         tf_Des = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        tf_Judul1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +67,7 @@ public class SuratMasuk extends javax.swing.JFrame {
         jLabel1.setText("Buat Surat Masuk");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Judul");
+        jLabel2.setText("Id Surat");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Perihal");
@@ -103,14 +105,13 @@ public class SuratMasuk extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Upload Surat");
 
+        jButton1.setBackground(new java.awt.Color(51, 255, 0));
         jButton1.setText("Upload");
 
-        jLabel11.setText("nama");
+        jLabel11.setText("Nama");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Deskripsi");
@@ -128,6 +129,9 @@ public class SuratMasuk extends javax.swing.JFrame {
 
         jLabel13.setText("DIVISI");
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setText("Judul");
+
         javax.swing.GroupLayout pn_SuratMasukLayout = new javax.swing.GroupLayout(pn_SuratMasuk);
         pn_SuratMasuk.setLayout(pn_SuratMasukLayout);
         pn_SuratMasukLayout.setHorizontalGroup(
@@ -136,8 +140,20 @@ public class SuratMasuk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_SuratMasukLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(pn_SuratMasukLayout.createSequentialGroup()
+                                .addGap(176, 176, 176)
+                                .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pn_SuratMasukLayout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pn_SuratMasukLayout.createSequentialGroup()
+                                        .addComponent(bt_Batal)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(bt_Tambah)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pn_SuratMasukLayout.createSequentialGroup()
                         .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pn_SuratMasukLayout.createSequentialGroup()
@@ -151,13 +167,10 @@ public class SuratMasuk extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel14))
                         .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tf_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pn_SuratMasukLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -168,20 +181,17 @@ public class SuratMasuk extends javax.swing.JFrame {
                                     .addComponent(tf_Jabatan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tf_Tgl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tf_Jenis, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pn_SuratMasukLayout.createSequentialGroup()
-                                .addComponent(bt_Batal)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_Tambah)))
-                        .addContainerGap(54, Short.MAX_VALUE))
+                            .addComponent(tf_Judul1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_SuratMasukLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(130, 130, 130)))
+                .addContainerGap())
         );
         pn_SuratMasukLayout.setVerticalGroup(
             pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,10 +201,14 @@ public class SuratMasuk extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tf_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(tf_Judul1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -233,11 +247,11 @@ public class SuratMasuk extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jLabel11)
                     .addComponent(jButton2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Tambah)
                     .addComponent(bt_Batal))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,6 +324,7 @@ public class SuratMasuk extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -325,6 +340,7 @@ public class SuratMasuk extends javax.swing.JFrame {
     private javax.swing.JTextField tf_Jabatan;
     private javax.swing.JTextField tf_Jenis;
     private javax.swing.JTextField tf_Judul;
+    private javax.swing.JTextField tf_Judul1;
     private javax.swing.JTextField tf_NoSurat;
     private javax.swing.JTextField tf_Perihal;
     private javax.swing.JTextField tf_Tgl;
