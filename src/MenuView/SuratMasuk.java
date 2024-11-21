@@ -55,6 +55,7 @@ public class SuratMasuk extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tf_Des = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +126,8 @@ public class SuratMasuk extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setText("DIVISI");
+
         javax.swing.GroupLayout pn_SuratMasukLayout = new javax.swing.GroupLayout(pn_SuratMasuk);
         pn_SuratMasuk.setLayout(pn_SuratMasukLayout);
         pn_SuratMasukLayout.setHorizontalGroup(
@@ -151,7 +154,10 @@ public class SuratMasuk extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tf_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pn_SuratMasukLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -183,7 +189,8 @@ public class SuratMasuk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(pn_SuratMasukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -302,6 +309,7 @@ public class SuratMasuk extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
