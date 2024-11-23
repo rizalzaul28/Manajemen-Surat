@@ -4,10 +4,55 @@
  */
 package MenuView;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import kelas.suratMasuk;
+
 public class SubSuratMasuk extends javax.swing.JPanel {
 
     public SubSuratMasuk() {
         initComponents();
+        loadTabel();
+    }
+
+   void loadTabel() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Surat");
+        model.addColumn("Judul");
+        model.addColumn("Perihal");
+        model.addColumn("Nomor Surat");
+        model.addColumn("Asal Surat");
+        model.addColumn("Tujuan");
+        model.addColumn("Tanggal Diterima");
+        model.addColumn("Jenis Surat");
+        model.addColumn("Keterangan");
+        model.addColumn("File Surat");
+
+        try {
+            suratMasuk surat = new suratMasuk();
+            ResultSet data = surat.tampilSurat();
+
+            while (data.next()) {
+                model.addRow(new Object[]{
+                    data.getString("id_surat"),
+                    data.getString("judul"),
+                    data.getString("perihal"),
+                    data.getString("no_surat"),
+                    data.getString("asal_surat"),
+                    data.getString("tujuan"),
+                    data.getString("tanggal_diterima"),
+                    data.getString("jenis_surat"),
+                    data.getString("keterangan"),
+                    data.getString("file_data"),});
+
+            }
+
+        } catch (SQLException sQLException) {
+        }
+
+        tbSuratMasuk.setModel(model);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -18,7 +63,11 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         pn1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbSuratMasuk = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        bTambah = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
         pnDetail = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,7 +88,7 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         jTextField8 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        bpn2Kembali = new javax.swing.JButton();
 
         setLayout(new java.awt.CardLayout());
 
@@ -64,15 +113,19 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tbSuratMasuk);
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Tambah Surat");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bTambah.setBackground(new java.awt.Color(0, 0, 255));
+        bTambah.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        bTambah.setForeground(new java.awt.Color(255, 255, 255));
+        bTambah.setText("Tambah Surat");
+        bTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bTambahActionPerformed(evt);
             }
         });
+
+        jLabel10.setText("Divisi");
+
+        jLabel11.setText("Cari");
 
         javax.swing.GroupLayout pn1Layout = new javax.swing.GroupLayout(pn1);
         pn1.setLayout(pn1Layout);
@@ -81,17 +134,39 @@ public class SubSuratMasuk extends javax.swing.JPanel {
             .addGroup(pn1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+                    .addGroup(pn1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bTambah)
                 .addContainerGap())
+            .addGroup(pn1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn1Layout.setVerticalGroup(
             pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn1Layout.createSequentialGroup()
-                .addContainerGap(185, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGap(28, 28, 28)
+                .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(bTambah)
+                .addGap(14, 14, 14)
+                .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -133,13 +208,13 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Kembali");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bpn2Kembali.setBackground(new java.awt.Color(204, 0, 0));
+        bpn2Kembali.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        bpn2Kembali.setForeground(new java.awt.Color(255, 255, 255));
+        bpn2Kembali.setText("Kembali");
+        bpn2Kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bpn2KembaliActionPerformed(evt);
             }
         });
 
@@ -172,7 +247,7 @@ public class SubSuratMasuk extends javax.swing.JPanel {
                             .addComponent(jTextField7)
                             .addComponent(jTextField8)
                             .addComponent(jScrollPane1)))
-                    .addComponent(jButton2))
+                    .addComponent(bpn2Kembali))
                 .addContainerGap(562, Short.MAX_VALUE))
         );
         pnDetailLayout.setVerticalGroup(
@@ -215,7 +290,7 @@ public class SubSuratMasuk extends javax.swing.JPanel {
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bpn2Kembali)
                 .addContainerGap())
         );
 
@@ -225,17 +300,18 @@ public class SubSuratMasuk extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbSuratMasukMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSuratMasukMousePressed
-         pnMain.removeAll();
+        pnMain.removeAll();
         pnMain.add(pnDetail);
         pnMain.repaint();
         pnMain.revalidate();
-        
+
         int row = tbSuratMasuk.getSelectedRow();
     }//GEN-LAST:event_tbSuratMasukMousePressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTambahActionPerformed
+        SuratMasuk sk = new SuratMasuk();
+        sk.setVisible(true);
+    }//GEN-LAST:event_bTambahActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
@@ -245,18 +321,21 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bpn2KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bpn2KembaliActionPerformed
         pnMain.removeAll();
         pnMain.add(pn1);
         pnMain.repaint();
         pnMain.revalidate();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bpn2KembaliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton bTambah;
+    private javax.swing.JButton bpn2Kembali;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -276,6 +355,7 @@ public class SubSuratMasuk extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel pn1;
     private javax.swing.JPanel pnDetail;
     private javax.swing.JPanel pnMain;

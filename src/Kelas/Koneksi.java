@@ -12,7 +12,7 @@ public class Koneksi {
 
     private Connection KonekstorSQL;
     private String host = "localhost";
-    private String db = "tokokita_202357201047";
+    private String db = "surats";
     private String user = "root";
     private String password = "";
     private String port = "3306";
