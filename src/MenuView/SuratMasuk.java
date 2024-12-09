@@ -1,17 +1,20 @@
 package MenuView;
 
+import MenuUtama.MenuUtama;
 import java.awt.Desktop;
-
 import java.io.File;
 
 import java.sql.SQLException;
-
 import javax.swing.JFileChooser;
-
 import javax.swing.JOptionPane;
-
 import kelas.suratMasuk;
 
+import MenuView.SubSuratMasuk;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,13 +26,69 @@ import kelas.suratMasuk;
  */
 public class SuratMasuk extends javax.swing.JFrame {
 
+    String judul;
+
     /**
      * Creates new form SuratMasuk
      */
-    String filepath;
-
     public SuratMasuk() {
+
         initComponents();
+        otoID();
+     
+
+    //    ambilDetail();
+
+    }
+
+    public void ambilDetail() {
+
+//            suratMasuk sut = new suratMasuk();
+        tf_id.setText(suratMasuk.getId_surat());
+        tf_Judul.setText(suratMasuk.getJudul());
+        tf_Perihal.setText(suratMasuk.getPerihal());
+        tf_NoSurat.setText(suratMasuk.getNo_surat());
+        tf_asal.setText(suratMasuk.getAsal_surat());
+        tf_Tujuan.setText(suratMasuk.getTujuan());
+        tf_Jenis.setText(suratMasuk.getJenis_surat());
+
+        tTanggalDiterima.setDate(suratMasuk.getTanggal_diterima());
+        tf_ket.setText(suratMasuk.getKeterangan());
+        txtfilepath.setText(suratMasuk.getFile_data());
+
+    }
+
+    void otoID() {
+        try {
+            suratMasuk surat = new suratMasuk();
+            String autoId = surat.otoID();
+
+            if (autoId != null) {
+                tf_id.setText(autoId);
+            } else {
+                tf_id.setText("1");
+            }
+            // tf_id.setEditable(false);
+            tf_id.setEnabled(false);
+
+        } catch (SQLException sQLException) {
+            System.out.println("Error saat memperoleh ID otomatis: " + sQLException.getMessage());
+            tf_id.setText("1");
+        }
+    }
+
+    void reset() {
+        tf_id.setText(null);
+        tf_Judul.setText(null);
+        tf_Perihal.setText(null);
+        tf_NoSurat.setText(null);
+        tf_asal.setText(null);
+        tf_Perihal.setText(null);
+        tf_Tujuan.setText(null);
+        tTanggalDiterima.setDate(null);
+        tf_Jenis.setText(null);
+        tf_ket.setText(null);
+        txtfilepath.setText(null);
 
     }
 
@@ -71,6 +130,8 @@ public class SuratMasuk extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         bOPen = new javax.swing.JButton();
         bTambah = new javax.swing.JButton();
+        bClose = new javax.swing.JButton();
+        bEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +148,7 @@ public class SuratMasuk extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel1.setText("Buat Surat Masuk");
+        jLabel1.setText("Surat Masuk");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Id Surat");
@@ -131,17 +192,31 @@ public class SuratMasuk extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Upload Surat");
 
-        bOPen.setText("Open");
+        bOPen.setText("Open FIle");
         bOPen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bOPenActionPerformed(evt);
             }
         });
 
-        bTambah.setText("Tambah");
+        bTambah.setText("TAMBAH");
         bTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bTambahActionPerformed(evt);
+            }
+        });
+
+        bClose.setText("CLOSE");
+        bClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCloseActionPerformed(evt);
+            }
+        });
+
+        bEdit.setText("SIMPAN");
+        bEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditActionPerformed(evt);
             }
         });
 
@@ -174,9 +249,6 @@ public class SuratMasuk extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tf_Jenis)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(258, 258, 258)
-                                        .addComponent(bOPen))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                                     .addComponent(tTanggalDiterima, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(416, 416, 416))
@@ -189,14 +261,21 @@ public class SuratMasuk extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
-                                .addGap(156, 156, 156)
-                                .addComponent(bUpload)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtfilepath, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(76, 76, 76)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bOPen)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(bUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtfilepath, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(425, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(490, 490, 490)
+                .addGap(380, 380, 380)
+                .addComponent(bClose)
+                .addGap(35, 35, 35)
                 .addComponent(bTambah)
+                .addGap(18, 18, 18)
+                .addComponent(bEdit)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,7 +283,7 @@ public class SuratMasuk extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,10 +325,13 @@ public class SuratMasuk extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(txtfilepath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bUpload))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bOPen)
-                .addGap(18, 18, 18)
-                .addComponent(bTambah)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bTambah)
+                    .addComponent(bClose)
+                    .addComponent(bEdit))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
@@ -301,15 +383,36 @@ public class SuratMasuk extends javax.swing.JFrame {
         jfc.showOpenDialog(this);
 
         try {
-            File f = jfc.getSelectedFile();
-            String filepath = f.getAbsolutePath();
-            filepath = filepath.replace('\\', '/');
-            // filepath = filepath + ".sql";
-            txtfilepath.setText(filepath);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
+            File selectedFile = jfc.getSelectedFile();
+            if (selectedFile != null) {
+                String filepath = selectedFile.getAbsolutePath();
+                filepath = filepath.replace('\\', '/');
 
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String timestamp = sdf.format(new Date());
+
+                String justFileName = selectedFile.getName();
+                String newName = timestamp + "_" + justFileName;
+
+                String destinationPath = "./Upload/surat/";
+                txtfilepath.setText(destinationPath + newName);
+
+                File destinationDirectory = new File(destinationPath);
+                if (!destinationDirectory.exists()) {
+                    destinationDirectory.mkdirs();
+                }
+
+                File destinationFile = new File(destinationDirectory, newName);
+
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING); // Menggunakan java.nio.file.Files untuk menyalin file
+            } else {
+                JOptionPane.showMessageDialog(null, "No file was selected");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to copy file: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage());
+        }
 
     }//GEN-LAST:event_bUploadActionPerformed
 
@@ -319,7 +422,7 @@ public class SuratMasuk extends javax.swing.JFrame {
             File file = new File(filePath);
 
             if (file.exists()) {
-                Desktop.getDesktop().open(file); // Buka file dengan aplikasi default
+                Desktop.getDesktop().open(file);
             } else {
                 JOptionPane.showMessageDialog(this, "File tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -330,6 +433,97 @@ public class SuratMasuk extends javax.swing.JFrame {
     }//GEN-LAST:event_bOPenActionPerformed
 
     private void bTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTambahActionPerformed
+
+        try {
+            suratMasuk surat = new suratMasuk();
+
+            String idSurat = tf_id.getText().trim();
+            String judul = tf_Judul.getText().trim();
+            String perihal = tf_Perihal.getText().trim();
+            String noSurat = tf_NoSurat.getText().trim();
+            String asalSurat = tf_asal.getText().trim();
+            String tujuan = tf_Tujuan.getText().trim();
+            java.util.Date tanggalDiterima = tTanggalDiterima.getDate();
+            String jenisSurat = tf_Jenis.getText().trim();
+            String keterangan = tf_ket.getText().trim();
+            String filePath = txtfilepath.getText().trim();
+
+            if (idSurat.isEmpty() || judul.isEmpty() || perihal.isEmpty() || noSurat.isEmpty()
+                    || asalSurat.isEmpty() || tujuan.isEmpty() || tanggalDiterima == null
+                    || jenisSurat.isEmpty() || keterangan.isEmpty() || filePath.isEmpty()) {
+
+                String missingFields = "SEMUA KOLOM HARUS DI ISI\n" + "Kolom yang masih kosong: ";
+                if (idSurat.isEmpty()) {
+                    missingFields += "ID Surat, ";
+                }
+                if (judul.isEmpty()) {
+                    missingFields += "Judul, ";
+                }
+                if (perihal.isEmpty()) {
+                    missingFields += "Perihal, ";
+                }
+                if (noSurat.isEmpty()) {
+                    missingFields += "No. Surat, ";
+                }
+                if (asalSurat.isEmpty()) {
+                    missingFields += "Asal Surat, ";
+                }
+                if (tujuan.isEmpty()) {
+                    missingFields += "Tujuan, ";
+                }
+                if (tanggalDiterima == null) {
+                    missingFields += "Tanggal Diterima, ";
+                }
+                if (jenisSurat.isEmpty()) {
+                    missingFields += "Jenis Surat, ";
+                }
+                if (keterangan.isEmpty()) {
+                    missingFields += "Keterangan, ";
+                }
+                if (filePath.isEmpty()) {
+                    missingFields += "File Path, ";
+                }
+
+                missingFields = missingFields.substring(0, missingFields.length() - 2);
+                JOptionPane.showMessageDialog(null, missingFields);
+                return;
+            }
+
+            surat.setId_surat(idSurat);
+            surat.setJudul(judul);
+            surat.setPerihal(perihal);
+            surat.setNo_surat(noSurat);
+            surat.setAsal_surat(asalSurat);
+            surat.setTujuan(tujuan);
+            surat.setTanggal_diterima(new java.sql.Date(tanggalDiterima.getTime()));
+            surat.setJenis_surat(jenisSurat);
+            surat.setKeterangan(keterangan);
+            surat.setFile_data(filePath);
+
+            surat.tambahSurat();
+
+            otoID();
+
+            reset();
+
+        } catch (SQLException sQLException) {
+            System.out.println("Data tidak masuk: " + sQLException.getMessage());
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data surat: " + sQLException.getMessage());
+        }
+        dispose();
+        MenuUtama.pn_Utama.removeAll();
+        MenuUtama.pn_Utama.add(new SubSuratMasuk());
+        MenuUtama.pn_Utama.repaint();
+        MenuUtama.pn_Utama.revalidate();
+
+    }//GEN-LAST:event_bTambahActionPerformed
+
+    private void bCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCloseActionPerformed
+        dispose();
+    }//GEN-LAST:event_bCloseActionPerformed
+
+    private void bEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditActionPerformed
+
         try {
             suratMasuk surat = new suratMasuk();
 
@@ -350,14 +544,23 @@ public class SuratMasuk extends javax.swing.JFrame {
 
             surat.setJenis_surat(tf_Jenis.getText());
             surat.setKeterangan(tf_ket.getText());
-            surat.setfile_data(txtfilepath.getText());
+            surat.setFile_data(txtfilepath.getText());
 
-            surat.tambahSurat();
+            surat.ubahSurat();
+
         } catch (SQLException sQLException) {
             System.out.println("Data tidak masuk");
-
         }
-    }//GEN-LAST:event_bTambahActionPerformed
+
+        dispose();
+
+        SubSuratMasuk.pnMain.removeAll();
+        SubSuratMasuk.pnMain.add(SubSuratMasuk.pnDetail);
+        SubSuratMasuk.pnMain.repaint();
+        SubSuratMasuk.pnMain.revalidate();
+
+
+    }//GEN-LAST:event_bEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,6 +590,7 @@ public class SuratMasuk extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -396,8 +600,10 @@ public class SuratMasuk extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bClose;
+    public javax.swing.JButton bEdit;
     private javax.swing.JButton bOPen;
-    private javax.swing.JButton bTambah;
+    public javax.swing.JButton bTambah;
     private javax.swing.JButton bUpload;
     private javax.swing.JButton bt_Batal;
     private javax.swing.JLabel jLabel1;
@@ -415,15 +621,15 @@ public class SuratMasuk extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pn_SuratMasuk;
-    private com.toedter.calendar.JDateChooser tTanggalDiterima;
-    private javax.swing.JTextField tf_Jenis;
-    private javax.swing.JTextField tf_Judul;
-    private javax.swing.JTextField tf_NoSurat;
-    private javax.swing.JTextField tf_Perihal;
-    private javax.swing.JTextField tf_Tujuan;
-    private javax.swing.JTextField tf_asal;
-    private javax.swing.JTextField tf_id;
-    private javax.swing.JTextArea tf_ket;
-    private javax.swing.JTextField txtfilepath;
+    public com.toedter.calendar.JDateChooser tTanggalDiterima;
+    public javax.swing.JTextField tf_Jenis;
+    public javax.swing.JTextField tf_Judul;
+    public javax.swing.JTextField tf_NoSurat;
+    public javax.swing.JTextField tf_Perihal;
+    public javax.swing.JTextField tf_Tujuan;
+    public javax.swing.JTextField tf_asal;
+    public javax.swing.JTextField tf_id;
+    public javax.swing.JTextArea tf_ket;
+    public javax.swing.JTextField txtfilepath;
     // End of variables declaration//GEN-END:variables
 }

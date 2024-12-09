@@ -145,7 +145,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private jpg3hor.JPG3Hor jPG3Hor1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pn_Menu;
-    private javax.swing.JPanel pn_Utama;
+    public static javax.swing.JPanel pn_Utama;
     private javax.swing.JPanel pn_content;
     private javax.swing.JPanel pn_navbar;
     private javax.swing.JPanel pn_sidebar;

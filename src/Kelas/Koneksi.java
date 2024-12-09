@@ -14,7 +14,7 @@ public class Koneksi {
     private String host = "localhost";
     private String db = "surats";
     private String user = "root";
-    private String password = "";
+    private String password = "dickyi_1351";
     private String port = "3306";
     private String url = "jdbc:mysql://" + host + ":" + port + "/" + db;
 

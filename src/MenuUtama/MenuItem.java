@@ -48,8 +48,8 @@ public class MenuItem extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         pn_Dasar = new javax.swing.JPanel();
         lb_Icon = new javax.swing.JLabel();
-        lb_IconSub = new javax.swing.JLabel();
         lb_Text = new javax.swing.JLabel();
+        lb_IconSub = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -74,9 +74,9 @@ public class MenuItem extends javax.swing.JPanel {
 
         lb_Icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lb_IconSub.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
         lb_Text.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+
+        lb_IconSub.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout pn_DasarLayout = new javax.swing.GroupLayout(pn_Dasar);
         pn_Dasar.setLayout(pn_DasarLayout);
@@ -191,5 +191,7 @@ public class MenuItem extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
+        
+        
 
 }
