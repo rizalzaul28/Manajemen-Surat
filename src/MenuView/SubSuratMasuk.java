@@ -35,15 +35,12 @@ public class SubSuratMasuk extends javax.swing.JPanel {
 
     void loadTabel() {
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID Surat");
-        model.addColumn("Judul");
-        model.addColumn("Perihal");
-        model.addColumn("Nomor Surat");
+       model.addColumn(null);
+        model.addColumn("Kategori");
+        model.addColumn("Bagian");
         model.addColumn("Asal Surat");
-        model.addColumn("Tujuan");
+        model.addColumn("Perihal");
         model.addColumn("Tanggal Diterima");
-        model.addColumn("Jenis Surat");
-        model.addColumn("Keterangan");
         model.addColumn("File Surat");
 
         try {
@@ -53,14 +50,11 @@ public class SubSuratMasuk extends javax.swing.JPanel {
             while (data.next()) {
                 model.addRow(new Object[]{
                     data.getString("id_surat"),
-                    data.getString("judul"),
-                    data.getString("perihal"),
-                    data.getString("no_surat"),
+                    data.getString("kategori"),
+                    data.getString("bagian"),
                     data.getString("asal_surat"),
-                    data.getString("tujuan"),
+                    data.getString("perihal"),
                     data.getString("tanggal_diterima"),
-                    data.getString("jenis_surat"),
-                    data.getString("keterangan"),
                     data.getString("file_data"),});
 
             }
@@ -69,6 +63,10 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         }
 
         tbSuratMasuk.setModel(model);
+         tbSuratMasuk.getColumnModel().getColumn(0).setMinWidth(0);
+        tbSuratMasuk.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbSuratMasuk.getColumnModel().getColumn(0).setWidth(0);
+
 
     }
 
@@ -85,6 +83,7 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        bDetail = new javax.swing.JButton();
         pnDetail = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -138,6 +137,9 @@ public class SubSuratMasuk extends javax.swing.JPanel {
             }
         ));
         tbSuratMasuk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSuratMasukMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbSuratMasukMousePressed(evt);
             }
@@ -159,6 +161,13 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ITM", "SI", "PTI", "TI" }));
 
         jLabel11.setText("Cari");
+
+        bDetail.setText("Detail");
+        bDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDetailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn1Layout = new javax.swing.GroupLayout(pn1);
         pn1.setLayout(pn1Layout);
@@ -185,6 +194,8 @@ public class SubSuratMasuk extends javax.swing.JPanel {
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(338, 338, 338)
+                .addComponent(bDetail)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn1Layout.setVerticalGroup(
@@ -194,12 +205,13 @@ public class SubSuratMasuk extends javax.swing.JPanel {
                 .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(bTambah)
                 .addGap(14, 14, 14)
                 .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bDetail))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -443,65 +455,68 @@ public class SubSuratMasuk extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbSuratMasukMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSuratMasukMousePressed
-        pnMain.removeAll();
-        pnMain.add(pnDetail);
-        pnMain.repaint();
-        pnMain.revalidate();
+//        pnMain.removeAll();
+//        pnMain.add(pnDetail);
+//        pnMain.repaint();
+//        pnMain.revalidate();
+//
+//        try {
+//            suratMasuk sur = new suratMasuk();
+//
+//        
+//
+//            int selectedRow = tbSuratMasuk.getSelectedRow();
+//            if (selectedRow != -1) {
+//
+//               
+//                sur.setId_surat(tbSuratMasuk.getValueAt(selectedRow, 0).toString());
+//                sur.setJudul(tbSuratMasuk.getValueAt(selectedRow, 1).toString());
+//                sur.setPerihal(tbSuratMasuk.getValueAt(selectedRow, 2).toString());
+//                sur.setNo_surat(tbSuratMasuk.getValueAt(selectedRow, 3).toString());
+//                sur.setAsal_surat(tbSuratMasuk.getValueAt(selectedRow, 4).toString());
+//                sur.setTujuan(tbSuratMasuk.getValueAt(selectedRow, 5).toString());
+//
+//               
+//                String tanggalDiterimaStr = tbSuratMasuk.getValueAt(selectedRow, 6).toString();
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd"); 
+//
+//                try {
+//                    Date tanggalDiterima = dateFormat.parse(tanggalDiterimaStr);
+//                    sur.setTanggal_diterima(new java.sql.Date(tanggalDiterima.getTime())); 
+//                } catch (Exception e) {
+//                    e.printStackTrace(); 
+//                }
+//
+//             
+//                sur.setJenis_surat(tbSuratMasuk.getValueAt(selectedRow, 7).toString());
+//                sur.setKeterangan(tbSuratMasuk.getValueAt(selectedRow, 8).toString());
+//                sur.setFile_data(tbSuratMasuk.getValueAt(selectedRow, 9).toString());
+//
+//              
+//                tId.setText(sur.getId_surat());
+//                tdJudul.setText(sur.getJudul());
+//                tdPerihal.setText(sur.getPerihal());
+//                tdNoSurat.setText(sur.getNo_surat());
+//                tdAsalSurat.setText(sur.getAsal_surat());
+//                tdTujuan.setText(sur.getTujuan());
+//
+//           
+//                SimpleDateFormat displayFormat = new SimpleDateFormat("yy-MM-dd");
+//                String formattedTanggalDiterima = displayFormat.format(sur.getTanggal_diterima());
+//                tdTanggalDIterima.setText(formattedTanggalDiterima);
+//
+//                tdJenisSurat.setText(sur.getJenis_surat());
+//                tdKeterangan.setText(sur.getKeterangan());
+//                tdFile.setText(sur.getFile_data());
+//            }
+//        } catch (SQLException sQLException) {
+//            sQLException.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace(); 
+//        }
+//
 
-        try {
-            suratMasuk sur = new suratMasuk();
 
-        
-
-            int selectedRow = tbSuratMasuk.getSelectedRow();
-            if (selectedRow != -1) {
-
-               
-                sur.setId_surat(tbSuratMasuk.getValueAt(selectedRow, 0).toString());
-                sur.setJudul(tbSuratMasuk.getValueAt(selectedRow, 1).toString());
-                sur.setPerihal(tbSuratMasuk.getValueAt(selectedRow, 2).toString());
-                sur.setNo_surat(tbSuratMasuk.getValueAt(selectedRow, 3).toString());
-                sur.setAsal_surat(tbSuratMasuk.getValueAt(selectedRow, 4).toString());
-                sur.setTujuan(tbSuratMasuk.getValueAt(selectedRow, 5).toString());
-
-               
-                String tanggalDiterimaStr = tbSuratMasuk.getValueAt(selectedRow, 6).toString();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd"); 
-
-                try {
-                    Date tanggalDiterima = dateFormat.parse(tanggalDiterimaStr);
-                    sur.setTanggal_diterima(new java.sql.Date(tanggalDiterima.getTime())); 
-                } catch (Exception e) {
-                    e.printStackTrace(); 
-                }
-
-             
-                sur.setJenis_surat(tbSuratMasuk.getValueAt(selectedRow, 7).toString());
-                sur.setKeterangan(tbSuratMasuk.getValueAt(selectedRow, 8).toString());
-                sur.setFile_data(tbSuratMasuk.getValueAt(selectedRow, 9).toString());
-
-              
-                tId.setText(sur.getId_surat());
-                tdJudul.setText(sur.getJudul());
-                tdPerihal.setText(sur.getPerihal());
-                tdNoSurat.setText(sur.getNo_surat());
-                tdAsalSurat.setText(sur.getAsal_surat());
-                tdTujuan.setText(sur.getTujuan());
-
-           
-                SimpleDateFormat displayFormat = new SimpleDateFormat("yy-MM-dd");
-                String formattedTanggalDiterima = displayFormat.format(sur.getTanggal_diterima());
-                tdTanggalDIterima.setText(formattedTanggalDiterima);
-
-                tdJenisSurat.setText(sur.getJenis_surat());
-                tdKeterangan.setText(sur.getKeterangan());
-                tdFile.setText(sur.getFile_data());
-            }
-        } catch (SQLException sQLException) {
-            sQLException.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace(); 
-        }
 
 
     }//GEN-LAST:event_tbSuratMasukMousePressed
@@ -548,6 +563,8 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         
         suratMasukFrame.ambilDetail();
         
+        
+        
 
     }//GEN-LAST:event_bEditActionPerformed
 
@@ -560,14 +577,71 @@ public class SubSuratMasuk extends javax.swing.JPanel {
         }
         
         
+        
         MenuUtama.pn_Utama.removeAll();
         MenuUtama.pn_Utama.add(new SubSuratMasuk());
         MenuUtama.pn_Utama.repaint();
         MenuUtama.pn_Utama.revalidate();
     }//GEN-LAST:event_bHapusActionPerformed
 
+    private void tbSuratMasukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSuratMasukMouseClicked
+       SuratMasuk suratMasukFrame = new SuratMasuk();
+        suratMasukFrame.setVisible(true);
+        
+        suratMasukFrame.bTambah.setVisible(false);
+        suratMasukFrame.setLocationRelativeTo(null);
+        
+        suratMasukFrame.ambilDetail();
+        
+        
+        
+        try {
+            suratMasuk sur = new suratMasuk();
+
+            
+    
+
+            int baris = tbSuratMasuk.getSelectedRow();
+       
+               
+                sur.setId_surat(tbSuratMasuk.getValueAt(baris, 0).toString());
+                sur.setKategori(tbSuratMasuk.getValueAt(baris, 1).toString());
+                sur.setBagian(tbSuratMasuk.getValueAt(baris, 2).toString());
+                sur.setAsal_surat(tbSuratMasuk.getValueAt(baris, 3).toString());
+                sur.setPerihal(tbSuratMasuk.getValueAt(baris, 4).toString());
+
+               
+                String tanggalDiterimaStr = tbSuratMasuk.getValueAt(baris, 5).toString();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd"); 
+
+                try {
+                    Date tanggalDiterima = dateFormat.parse(tanggalDiterimaStr);
+                    sur.setTanggal_diterima(new java.sql.Date(tanggalDiterima.getTime())); 
+                } catch (Exception e) {
+                    e.printStackTrace(); 
+                }
+
+             
+  
+                sur.setFile_data(tbSuratMasuk.getValueAt(baris, 6).toString());
+               
+              suratMasukFrame.ambilDetail();
+              
+           
+        } catch (SQLException sQLException) {
+            sQLException.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+    }//GEN-LAST:event_tbSuratMasukMouseClicked
+
+    private void bDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDetailActionPerformed
+      
+    }//GEN-LAST:event_bDetailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton bDetail;
     public javax.swing.JButton bEdit;
     public javax.swing.JButton bHapus;
     public javax.swing.JButton bOpen;

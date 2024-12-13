@@ -1,11 +1,6 @@
 package kelas;
 
 import Kelas.Koneksi;
-import java.awt.Component;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -22,10 +17,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class suratMasuk {
 
-    private static String id_surat, judul, perihal, no_surat, asal_surat, tujuan, jenis_surat, keterangan, file_data;
+    private static String id_surat,kategori, bagian, asal_surat, perihal, file_data;
 
     private static java.sql.Date tanggal_diterima;
-    private static final String destinationPath = "./Upload/surat/"; // Ensure this is declared at the class level
+   // private static final String destinationPath = "./Upload/surat/"; // Ensure this is declared at the class level
 
     private Connection konek;
     private PreparedStatement ps;
@@ -45,29 +40,23 @@ public class suratMasuk {
     public static void setId_surat(String id_surat) {
         suratMasuk.id_surat = id_surat;
     }
+    
+    
 
-    public static String getJudul() {
-        return judul;
+    public static String getKategori() {
+        return kategori;
     }
 
-    public static void setJudul(String judul) {
-        suratMasuk.judul = judul;
+    public static void setKategori(String kategori) {
+        suratMasuk.kategori = kategori;
     }
 
-    public static String getPerihal() {
-        return perihal;
+    public static String getBagian() {
+        return bagian;
     }
 
-    public static void setPerihal(String perihal) {
-        suratMasuk.perihal = perihal;
-    }
-
-    public static String getNo_surat() {
-        return no_surat;
-    }
-
-    public static void setNo_surat(String no_surat) {
-        suratMasuk.no_surat = no_surat;
+    public static void setBagian(String bagian) {
+        suratMasuk.bagian = bagian;
     }
 
     public static String getAsal_surat() {
@@ -78,28 +67,12 @@ public class suratMasuk {
         suratMasuk.asal_surat = asal_surat;
     }
 
-    public static String getTujuan() {
-        return tujuan;
+    public static String getPerihal() {
+        return perihal;
     }
 
-    public static void setTujuan(String tujuan) {
-        suratMasuk.tujuan = tujuan;
-    }
-
-    public static String getJenis_surat() {
-        return jenis_surat;
-    }
-
-    public static void setJenis_surat(String jenis_surat) {
-        suratMasuk.jenis_surat = jenis_surat;
-    }
-
-    public static String getKeterangan() {
-        return keterangan;
-    }
-
-    public static void setKeterangan(String keterangan) {
-        suratMasuk.keterangan = keterangan;
+    public static void setPerihal(String perihal) {
+        suratMasuk.perihal = perihal;
     }
 
     public static String getFile_data() {
@@ -118,6 +91,7 @@ public class suratMasuk {
         suratMasuk.tanggal_diterima = tanggal_diterima;
     }
 
+  
    
 
     public Connection getKonek() {
@@ -162,23 +136,21 @@ public class suratMasuk {
 
     public void tambahSurat() {
         query = "INSERT INTO surat_masuk(id_surat,"
-                + "judul,"
-                + "perihal,"
-                + "no_surat,"
+                + "kategori,"
+                + "bagian,"
                 + "asal_surat,"
-                + "tujuan,tanggal_diterima,jenis_surat,keterangan,file_data) VALUES(?,?,?,?,?,?,?,?,?,?)";
+                + "perihal,"
+                + "tanggal_diterima,"
+                + "file_data) VALUES(?,?,?,?,?,?,?)";
         try {
             ps = konek.prepareStatement(query);
             ps.setString(1, id_surat);
-            ps.setString(2, judul);
-            ps.setString(3, perihal);
-            ps.setString(4, no_surat);
-            ps.setString(5, asal_surat);
-            ps.setString(6, tujuan);
-            ps.setDate(7, tanggal_diterima);
-            ps.setString(8, jenis_surat);
-            ps.setString(9, keterangan);
-            ps.setString(10, file_data);
+            ps.setString(2, kategori);
+            ps.setString(3, bagian);
+            ps.setString(4, asal_surat);
+            ps.setString(5, perihal);
+            ps.setDate(6, tanggal_diterima);
+            ps.setString(7, file_data);
 
             ps.executeUpdate();
             ps.close();
@@ -217,28 +189,22 @@ public class suratMasuk {
 
     public void ubahSurat() {
         query = "UPDATE surat_masuk SET "
-                + "judul = ?, "
-                + "perihal = ?, "
-                + "no_surat = ?, "
+                + "kategori = ?, "
+                + "bagian = ?, "
                 + "asal_surat = ?, "
-                + "tujuan = ?, "
+                + "perihal = ?, "
                 + "tanggal_diterima = ?, "
-                + "jenis_surat = ?, "
-                + "keterangan = ?, "
                 + "file_data = ? "
                 + "WHERE id_surat = ?";
         try {
             ps = konek.prepareStatement(query);
-            ps.setString(1, judul);
-            ps.setString(2, perihal);
-            ps.setString(3, no_surat);
-            ps.setString(4, asal_surat);
-            ps.setString(5, tujuan);
-            ps.setDate(6, tanggal_diterima);
-            ps.setString(7, jenis_surat);
-            ps.setString(8, keterangan);
-            ps.setString(9, file_data);
-            ps.setString(10, id_surat);
+            ps.setString(1, kategori);
+            ps.setString(2, bagian);
+            ps.setString(3, asal_surat);
+            ps.setString(4, perihal);
+            ps.setDate(5, tanggal_diterima);
+            ps.setString(6, file_data);
+            ps.setString(7, id_surat);
 
             ps.executeUpdate();
             ps.close();
@@ -251,7 +217,7 @@ public class suratMasuk {
 
     public static void getDataDetail(DefaultTableModel model, String id_surat, Connection konek) {
         model.setRowCount(0);
-        String sql = "SELECT id_surat, judul, perihal, no_surat, asal_surat, tujuan, tanggal_diterima, jenis_surat, keterangan, file_data "
+        String sql = "SELECT id_surat, kategori, bagian, asal_surat, perihal, tanggal_diterima, file_data "
                 + "FROM surat_masuk WHERE id_surat = ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -263,17 +229,14 @@ public class suratMasuk {
 
             while (rs.next()) {
                 String id = rs.getString("id_surat");
-                String judul = rs.getString("judul");
+                String kategori = rs.getString("kategori");
+                String bagian = rs.getString("bagian");
+                String asalsurat = rs.getString("asal_surat");
                 String perihal = rs.getString("perihal");
-                String noSurat = rs.getString("no_surat");
-                String asalSurat = rs.getString("asal_surat");
-                String tujuan = rs.getString("tujuan");
                 String tanggalDiterima = rs.getString("tanggal_diterima");
-                String jenisSurat = rs.getString("jenis_surat");
-                String keterangan = rs.getString("keterangan");
                 String fileData = rs.getString("file_data");
 
-                model.addRow(new Object[]{id, judul, perihal, noSurat, asalSurat, tujuan, tanggalDiterima, jenisSurat, keterangan, fileData});
+                model.addRow(new Object[]{id, kategori, bagian, asalsurat, perihal, tanggalDiterima, fileData});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Failed to retrieve data");
